@@ -9,19 +9,19 @@ const features = [
     icon: <Building2 size={40} />,
     title: "Expert Engineer",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptatem provident incidunt obcaecati.",
+      "Our team is led by certified engineers with years of hands-on experience in delivering innovative and reliable solutions across various industries.",
   },
   {
     icon: <BadgeDollarSign size={40} />,
     title: "Free Estimates",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptatem provident incidunt obcaecati.",
+      "We provide transparent and no-obligation quotes to help you plan your project budget with confidence—no hidden fees, ever.",
   },
   {
     icon: <Wrench size={40} />,
     title: "Quality Materials",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptatem provident incidunt obcaecati.",
+      "We use only premium-grade materials sourced from trusted suppliers to ensure long-lasting performance and satisfaction.",
   },
 ];
 
@@ -30,8 +30,9 @@ const WhyChooseUs = () => {
     triggerOnce: false,
     threshold: 0.3,
   });
+
   return (
-    <section ref={ref} className="py-16 bg-gray-50 text-center">
+    <section ref={ref} className="py-16 bg-gray-100 text-center">
       <div className="container mx-auto px-4">
         <p className="text-orange-600 font-semibold mb-2 uppercase tracking-wide">
           Why Us

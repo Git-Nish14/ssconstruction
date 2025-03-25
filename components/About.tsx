@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { HardHat, Users, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -11,8 +12,9 @@ const About = () => {
 
   return (
     <section
+      id="about"
       ref={sectionRef}
-      className="bg-gray-50 px-4 sm:px-6 md:px-12 lg:px-20 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden"
+      className="bg-gray-200 px-4 sm:px-6 md:px-12 lg:px-20 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden"
     >
       {/* Left Section with Images */}
       <motion.div
@@ -71,7 +73,7 @@ const About = () => {
         {/* Team Image and Features */}
         <div className="flex flex-col sm:flex-row mb-6 gap-4">
           <div className="sm:mr-4 relative w-full sm:w-auto sm:h-48 h-full aspect-square mb-4 sm:mb-0">
-            <div className="relative w-full h-full border-4 border-orange-500">
+            <div className="relative w-full h-full border-4 border-orange-500 bg-white">
               <Image
                 src="/img/about-1.png"
                 alt="Construction Team"
@@ -105,8 +107,7 @@ const About = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-base sm:text-lg mb-8">
           {[
             "100% Satisfaction",
-            "Annual Pass Programs",
-            "Trained Emploies",
+            "Trained Employees",
             "Flexible and cost effective",
           ].map((text, i) => (
             <motion.div
@@ -123,14 +124,16 @@ const About = () => {
         </div>
 
         {/* Animated Button */}
-        <motion.button
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="bg-orange-500 hover:bg-[#001248] text-white px-6 sm:px-8 py-3 transition duration-300 text-sm sm:text-base font-medium rounded-full"
-        >
-          Discover More
-        </motion.button>
+        <Link href={"/about"}>
+          <motion.button
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="bg-orange-500 hover:bg-[#001248] text-white px-6 sm:px-8 py-3 transition duration-300 text-sm sm:text-base font-medium rounded-full"
+          >
+            Discover More
+          </motion.button>
+        </Link>
       </motion.div>
     </section>
   );

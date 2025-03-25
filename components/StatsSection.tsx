@@ -22,7 +22,7 @@ const stats = [
   {
     icon: <Heart size={40} className="text-orange-500" />,
     title: "Years Experience",
-    value: 17,
+    value: 25,
   },
 ];
 
@@ -70,11 +70,6 @@ const StatsSection = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <button className="bg-orange-500 hover:bg-[#001248] text-white font-medium px-8 py-3 rounded-full hover:border">
-            Join With Us
-          </button>
         </div>
       </div>
     </section>

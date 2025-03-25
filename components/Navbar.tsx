@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Building2 } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,72 +9,71 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
-        <div className="text-2xl font-bold text-orange-600 flex items-center gap-2">
-          <span>🏢</span> Constra
-        </div>
+    <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50 py-3">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0 text-xl md:text-3xl font-semibold font-serif text-orange-600 flex flex-row gap-2">
+            <span className="text-blue-950">
+              <Building2 size={28} />
+            </span>
+            Sindhwai Constructions
+          </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
-          <a href="#" className="hover:text-orange-600">
-            Home
-          </a>
-          <a href="#" className="hover:text-orange-600">
-            About
-          </a>
-          <a href="#" className="hover:text-orange-600">
-            Services
-          </a>
-          <a href="#" className="hover:text-orange-600">
-            Projects
-          </a>
-          <a href="#" className="hover:text-orange-600">
-            Contact
-          </a>
-        </nav>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">
-            Get a Quote
-          </button>
-        </div>
-
-        {/* Mobile Hamburger */}
-        <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-gray-800">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white shadow-lg px-4 pb-4">
-          <nav className="flex flex-col gap-4 text-gray-700 font-medium">
-            <a href="#" className="hover:text-orange-600">
-              Home
-            </a>
-            <a href="#" className="hover:text-orange-600">
-              About
-            </a>
-            <a href="#" className="hover:text-orange-600">
-              Services
-            </a>
-            <a href="#" className="hover:text-orange-600">
-              Projects
-            </a>
-            <a href="#" className="hover:text-orange-600">
-              Contact
-            </a>
-            <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded w-full text-left">
-              Get a Quote
-            </button>
+          {/* Desktop Nav - Right Aligned */}
+          <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
+            {[
+              { label: "Home", href: "#hero" },
+              { label: "About", href: "#about" },
+              { label: "Services", href: "#services" },
+              { label: "Projects", href: "#projects" },
+              { label: "Contact", href: "/contact" },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="relative px-2 py-1 hover:text-orange-600 hover:scale-105 transition-all duration-300 group"
+              >
+                <span className="relative z-10">{label}</span>
+                <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+              </a>
+            ))}
           </nav>
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-gray-800">
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden bg-white shadow-lg px-4 pb-4">
+            <nav className="flex flex-col gap-4 text-gray-700 font-medium">
+              {["Home", "About", "Services", "Projects", "Contact"].map(
+                (item) => (
+                  <a
+                    key={item}
+                    onClick={() => setIsOpen(false)}
+                    href="#"
+                    className="relative px-2 py-1 hover:text-orange-600 transition-colors duration-300 group"
+                  >
+                    <span className="relative z-10">{item}</span>
+                    <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  </a>
+                )
+              )}
+              <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded w-full text-left">
+                Get a Quote
+              </button>
+            </nav>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

@@ -8,91 +8,83 @@ import {
   Instagram,
   Twitter,
   Linkedin,
+  ArrowUp,
 } from "lucide-react";
 
 export default function Footer() {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
-    <footer className="bg-[#0D1B2A] text-white pt-12 pb-6 px-4 md:px-20">
-      <div className="grid md:grid-cols-4 gap-10">
-        {/* Newsletter */}
-        <div>
+    <footer className="bg-[#0D1B2A] text-white pt-12 pb-6 px-4 md:px-20 relative">
+      <div className="flex flex-col md:flex-row justify-around gap-12 md:gap-20">
+        {/* Newsletter - Left Side */}
+        <div className="md:w-1/2">
           <h2 className="text-xl font-semibold mb-4">Newsletter</h2>
           <p className="text-sm text-gray-300 mb-4">
-            Dolor amet sit justo amet elitr clita ipsum elitr est. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit.
+            Stay updated with our latest news and updates. Subscribe to our
+            newsletter!
           </p>
-          <div className="flex">
+          <div className="flex max-w-md">
             <input
               type="email"
               placeholder="Enter your email"
-              className="p-2 rounded-l-md text-white w-full"
+              className="p-3 rounded-l-md text-white bg-[#1B263B] w-full placeholder-gray-400 focus:outline-none"
             />
-            <button className="bg-orange-500 px-4 py-2 rounded-r-md font-semibold hover:bg-orange-600">
-              SignUp
+            <button className="bg-orange-500 px-5 py-2 rounded-r-md font-semibold hover:bg-orange-600 transition-all">
+              Sign Up
             </button>
           </div>
         </div>
 
-        {/* Explore */}
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Explore</h2>
-          <ul className="space-y-2 text-sm text-gray-300">
-            {[
-              "Home",
-              "Services",
-              "About Us",
-              "Latest Projects",
-              "Testimonial",
-              "Contact Us",
-            ].map((item) => (
-              <li key={item} className="hover:text-white cursor-pointer">
-                › {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Our Services */}
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Our Services</h2>
-          <ul className="space-y-2 text-sm text-gray-300">
-            {[
-              "General Construction",
-              "Property Maintenance",
-              "Project Management",
-              "Virtual Design & Build",
-              "Residential Construction",
-              "Preconstruction",
-              "Design Build",
-            ].map((service) => (
-              <li key={service} className="hover:text-white cursor-pointer">
-                › {service}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Contact Info */}
-        <div>
+        {/* Contact Info - Right Side */}
+        <div className="md:w-1/2">
           <h2 className="text-xl font-semibold mb-4">Contact Info</h2>
           <div className="text-sm text-gray-300 space-y-3">
             <div className="flex items-start gap-2">
-              <MapPin size={16} /> <span>Ahmedabad, India</span>
+              <MapPin size={18} /> <span>Ahmedabad, India</span>
             </div>
             <div className="flex items-center gap-2">
-              <Mail size={16} /> <span>Sindhwai_const@yahoo.in</span>
+              <Mail size={18} /> <span>Sindhwai_const@yahoo.in</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone size={16} /> <span>+012 345 67890</span>
+              <Phone size={18} /> <span>+012 345 67890</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone size={16} /> <span>+012 345 67890</span>
+              <Phone size={18} /> <span>+012 345 67890</span>
             </div>
             <div className="flex gap-4 mt-4">
-              <Facebook className="hover:text-orange-500 cursor-pointer" />
-              <Twitter className="hover:text-orange-500 cursor-pointer" />
-              <Instagram className="hover:text-orange-500 cursor-pointer" />
-              <Linkedin className="hover:text-orange-500 cursor-pointer" />
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-orange-500 transition"
+              >
+                <Facebook />
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-orange-500 transition"
+              >
+                <Twitter />
+              </a>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-orange-500 transition"
+              >
+                <Instagram />
+              </a>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-orange-500 transition"
+              >
+                <Linkedin />
+              </a>
             </div>
           </div>
         </div>
@@ -108,11 +100,20 @@ export default function Footer() {
         <a
           href="https://www.techifive.com"
           target="_blank"
-          className="text-blue-400 underline"
+          className="text-blue-400 underline hover:text-blue-300 transition"
         >
           Techifive
         </a>
       </div>
+
+      {/* Scroll to Top Arrow */}
+      <button
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+        className="fixed right-4 bottom-4 bg-orange-500 hover:bg-orange-600 p-2 rounded-full shadow-md transition z-50"
+      >
+        <ArrowUp size={20} className="text-white" />
+      </button>
     </footer>
   );
 }

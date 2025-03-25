@@ -39,7 +39,7 @@ const Services: FC = () => {
   return (
     <section
       ref={ref}
-      className="bg-gray-50 py-24 px-6 md:px-12 lg:px-24"
+      className="bg-gray-200 py-24 px-6 md:px-12 lg:px-24"
       id="services"
     >
       {/* Heading */}
@@ -53,7 +53,7 @@ const Services: FC = () => {
           OUR SERVICES
         </h2>
         <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mt-3">
-          Our Service Is Creative, & Decent
+          Our Services are Creative & Decent
         </h1>
       </motion.div>
 

@@ -2,42 +2,41 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 
 const projects = [
   {
     category: "Architecture",
-    title: "We Building Everything",
+    title: "Modern Corporate Towers",
     image: "/img/project-1.jpg",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur tempore perferendis velit minus, perspiciatis eveniet adipisci tempora voluptatem quis dolores.",
+      "High-rise architectural project featuring advanced design and precision engineering, tailored for premium commercial spaces.",
   },
   {
     category: "Interior Design",
-    title: "We Building Everything",
+    title: "Commercial Space Interiors",
     image: "/img/project-2.jpg",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur tempore perferendis velit minus, perspiciatis eveniet adipisci tempora voluptatem quis dolores.",
+      "Interior design project for a commercial high-rise, focusing on functionality, aesthetics, and seamless spatial flow.",
   },
   {
     category: "House & Exterior",
-    title: "We Building Everything",
+    title: "Residential Villa Development",
     image: "/img/project-3.jpg",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur tempore perferendis velit minus, perspiciatis eveniet adipisci tempora voluptatem quis dolores.",
+      "Modern housing construction with efficient space planning and exterior finishing, combining style and durability.",
   },
   {
     category: "Interior Design",
-    title: "We Building Everything",
+    title: "Premium Family Home",
     image: "/img/project-4.jpg",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur tempore perferendis velit minus, perspiciatis eveniet adipisci tempora voluptatem quis dolores.",
+      "Customized residential interiors with a focus on comfort, lighting, and eco-friendly materials for a warm ambiance.",
   },
 ];
 
 const ProjectsSection = () => {
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-100">
+    <section id="projects" className="py-16 px-4 md:px-8 lg:px-16 bg-gray-200">
       {/* Section Header */}
       <div className="text-center mb-12">
         <h3 className="text-orange-500 font-medium uppercase tracking-wide">
@@ -86,45 +85,11 @@ const ProjectsSection = () => {
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                   {project.description}
                 </p>
-                <Link href="#">
-                  <span className="inline-block bg-blue-950 text-white px-5 py-2 text-sm font-medium transition-colors hover:bg-blue-900 rounded-full">
-                    Read More
-                  </span>
-                </Link>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
-
-      {/* More Projects Button */}
-      <div className="flex justify-center mt-12">
-        <Link href="#">
-          <span className="inline-block bg-orange-500 text-white px-8 py-3 font-medium transition-colors hover:bg-orange-600 rounded-full">
-            More Projects
-          </span>
-        </Link>
-      </div>
-
-      {/* Scroll to Top Button (Fixed Bottom Right) */}
-      <Link href="#top">
-        <span className="fixed bottom-6 right-6 bg-orange-500 text-white p-3 rounded-none shadow-md transition-transform hover:translate-y-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 15l7-7 7 7"
-            />
-          </svg>
-        </span>
-      </Link>
     </section>
   );
 };

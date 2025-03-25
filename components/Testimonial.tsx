@@ -17,37 +17,37 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Client Name",
-    profession: "Profession",
+    name: "Sarah Mitchell",
+    profession: "Marketing Director",
     quote:
-      "Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Working with this team was an absolute pleasure. Their attention to detail and commitment to excellence exceeded our expectations.",
     rating: 4.5,
     image: "/img/testimonial-1.jpg",
   },
   {
     id: 2,
-    name: "Client Name",
-    profession: "Profession",
+    name: "James Anderson",
+    profession: "Project Manager",
     quote:
-      "Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Professional, timely, and efficient. Their expertise helped us bring our vision to life, and the results were outstanding.",
     rating: 4.5,
     image: "/img/testimonial-2.jpg",
   },
   {
     id: 3,
-    name: "Client Name",
-    profession: "Profession",
+    name: "Alicia Gomez",
+    profession: "Entrepreneur",
     quote:
-      "Our experience with Constra was exceptional. The team delivered beyond our expectations and completed the project on time.",
+      "The team demonstrated exceptional creativity and professionalism throughout the project. I was impressed by their dedication.",
     rating: 5,
     image: "/img/testimonial-3.jpg",
   },
   {
     id: 4,
-    name: "Client Name",
-    profession: "Profession",
+    name: "Michael Tanaka",
+    profession: "Software Engineer",
     quote:
-      "Professional service, innovative solutions, and attention to detail. I highly recommend their construction services.",
+      "Excellent service from start to finish. Their innovative approach and responsiveness made a real difference in our project.",
     rating: 4,
     image: "/img/testimonial-4.jpg",
   },
