@@ -17,7 +17,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sarah Mitchell",
+    name: "Santosh Nagar",
     profession: "Marketing Director",
     quote:
       "Working with this team was an absolute pleasure. Their attention to detail and commitment to excellence exceeded our expectations.",
@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "James Anderson",
+    name: "Jimmy patel",
     profession: "Project Manager",
     quote:
       "Professional, timely, and efficient. Their expertise helped us bring our vision to life, and the results were outstanding.",
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 3,
-    name: "Alicia Gomez",
+    name: "Shreya pilgaonkar",
     profession: "Entrepreneur",
     quote:
       "The team demonstrated exceptional creativity and professionalism throughout the project. I was impressed by their dedication.",
@@ -44,7 +44,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Michael Tanaka",
+    name: "Arvind gupta",
     profession: "Software Engineer",
     quote:
       "Excellent service from start to finish. Their innovative approach and responsiveness made a real difference in our project.",
