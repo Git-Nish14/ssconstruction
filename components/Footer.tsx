@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0D1B2A] text-white pt-12 pb-6 px-4 md:px-20 relative">
-      <div className="flex flex-col md:flex-row justify-around gap-12 md:gap-20">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
         {/* Newsletter - Left Side */}
         <div className="md:w-1/2">
           <h2 className="text-xl font-semibold mb-4">Newsletter</h2>
@@ -37,56 +37,60 @@ export default function Footer() {
         </div>
 
         {/* Contact Info - Right Side */}
-        <div className="md:w-1/2">
-          <h2 className="text-xl font-semibold mb-4">Contact Info</h2>
-          <div className="text-sm text-gray-300 space-y-3">
-            <div className="flex items-start gap-2">
-              <MapPin size={18} /> <span>Ahmedabad, India</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Mail size={18} /> <span>Sindhwai_const@yahoo.in</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Phone size={18} /> <span>+012 345 67890</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Phone size={18} /> <span>+012 345 67890</span>
-            </div>
-            <div className="flex gap-4 mt-4">
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-orange-500 transition"
-              >
-                <Facebook />
-              </a>
-              <a
-                href="https://twitter.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-orange-500 transition"
-              >
-                <Twitter />
-              </a>
-              <a
-                href="https://instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-orange-500 transition"
-              >
-                <Instagram />
-              </a>
-              <a
-                href="https://linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-orange-500 transition"
-              >
-                <Linkedin />
-              </a>
+        <div className="md:w-1/2 flex flex-col items-end">
+          <div>
+
+            <h2 className="text-xl font-semibold mb-4">Contact Info</h2>
+            <div className="text-sm text-gray-300 space-y-3">
+              <div className="flex items-start gap-2">
+                <MapPin size={18} /> <span>Ahmedabad, India</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={18} /> <span>Sindhwai_const@yahoo.in</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone size={18} /> <span>+012 345 67890</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone size={18} /> <span>+012 345 67890</span>
+              </div>
+              <div className="flex gap-4 mt-4">
+                <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500 transition"
+                >
+                  <Facebook />
+                </a>
+                <a
+                  href="https://twitter.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500 transition"
+                >
+                  <Twitter />
+                </a>
+                <a
+                  href="https://instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500 transition"
+                >
+                  <Instagram />
+                </a>
+                <a
+                  href="https://linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500 transition"
+                >
+                  <Linkedin />
+                </a>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
