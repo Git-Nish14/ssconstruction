@@ -59,14 +59,14 @@ export default function AboutUs() {
             </p>
             <p className="text-base text-gray-700 dark:text-gray-400">
               <span className="font-semibold text-orange-500">
-                Founded and led by Mr. Uttam Kanaiyalal Patel
+                {`Founded and led by Mr. Uttam Kanaiyalal Patel`}
               </span>
-              , a seasoned Civil Engineer with unmatched industry expertise and
+              {`, a seasoned Civil Engineer with unmatched industry expertise and
               a passion for structural excellence, Sindhwai Constructions is
               more than a company—it’s a commitment to building a better,
               stronger future. Mr. Patel's vision has been the guiding light for
               the company's steady growth and reputation for integrity and
-              reliability.
+              reliability.`}
             </p>
           </div>
         </div>
