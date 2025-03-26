@@ -131,7 +131,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="bg-orange-500 hover:bg-[#001248] text-white px-6 sm:px-8 py-3 transition duration-300 text-sm sm:text-base font-medium rounded-full"
           >
-            Discover More
+            More About Us
           </motion.button>
         </Link>
       </motion.div>

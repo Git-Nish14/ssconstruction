@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ThumbsUp, Users, User, Heart } from "lucide-react";
 
 const stats = [
   {
     icon: <ThumbsUp size={40} className="text-orange-500" />,
     title: "Completed Projects",
-    value: 456,
+    value: 100,
   },
   {
     icon: <Users size={40} className="text-orange-500" />,
     title: "Happy Customers",
-    value: 513,
+    value: 411,
   },
   {
     icon: <User size={40} className="text-orange-500" />,
@@ -28,25 +28,45 @@ const stats = [
 
 const Counter = ({ value }: { value: number }) => {
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    let start = 0;
-    const end = value;
-    if (start === end) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          let start = 0;
+          const end = value;
+          const duration = 1500;
+          const incrementTime = Math.floor(duration / end);
 
-    const duration = 1500;
-    const incrementTime = Math.floor(duration / end);
+          const timer = setInterval(() => {
+            start += 1;
+            setCount(start);
+            if (start === end) {
+              clearInterval(timer);
+              setHasAnimated(true);
+            }
+          }, incrementTime);
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
 
-    return () => clearInterval(timer);
-  }, [value]);
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [value, hasAnimated]);
 
-  return <span>{count}+</span>;
+  return (
+    <div ref={ref}>
+      <span>{count}+</span>
+    </div>
+  );
 };
 
 const StatsSection = () => {

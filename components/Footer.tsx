@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Mail,
   MapPin,
@@ -14,107 +13,106 @@ import {
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
+  const socialLinks = [
+    { icon: Facebook, href: "https://www.facebook.com/", label: "Facebook" },
+    { icon: Twitter, href: "https://twitter.com/", label: "Twitter" },
+    { icon: Instagram, href: "https://instagram.com/", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
+  ];
+
   return (
-    <footer className="bg-[#0D1B2A] text-white pt-12 pb-6 px-4 md:px-20 relative">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
-        {/* Newsletter - Left Side */}
-        <div className="md:w-1/2">
-          <h2 className="text-xl font-semibold mb-4">Newsletter</h2>
-          <p className="text-sm text-gray-300 mb-4">
-            Stay updated with our latest news and updates. Subscribe to our
-            newsletter!
-          </p>
-          <div className="flex max-w-md">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="p-3 rounded-l-md text-white bg-[#1B263B] w-full placeholder-gray-400 focus:outline-none"
-            />
-            <button className="bg-orange-500 px-5 py-2 rounded-r-md font-semibold hover:bg-orange-600 transition-all">
-              Sign Up
-            </button>
+    <footer className="bg-[#121f2f] text-white py-12 px-4 md:px-12 lg:px-20 relative md:mb-0">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 md:mb-0">
+          {/* Company Branding */}
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold mb-4 text-orange-500">
+              Shree Sindhwai Constructions
+            </h2>
+            <p className="text-gray-300 text-sm">
+              Building excellence, delivering quality, and creating lasting
+              value.
+            </p>
           </div>
-        </div>
 
-        {/* Contact Info - Right Side */}
-        <div className="md:w-1/2 flex flex-col items-end">
-          <div>
-
-            <h2 className="text-xl font-semibold mb-4">Contact Info</h2>
-            <div className="text-sm text-gray-300 space-y-3">
-              <div className="flex items-start gap-2">
-                <MapPin size={18} /> <span>Ahmedabad, India</span>
+          {/* Contact Information */}
+          <div className="text-center">
+            <h3 className="text-xl font-semibold mb-4 text-white">
+              Contact Information
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-center gap-2 text-gray-300">
+                <MapPin size={18} className="text-orange-500" />
+                <span>Ahmedabad, India</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail size={18} /> <span>Sindhwai_const@yahoo.in</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone size={18} /> <span>+012 345 67890</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone size={18} /> <span>+012 345 67890</span>
-              </div>
-              <div className="flex gap-4 mt-4">
+              <div className="flex items-center justify-center gap-2 text-gray-300">
+                <Mail size={18} className="text-orange-500" />
                 <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-orange-500 transition"
+                  href="mailto:sindhwai_const@yahoo.in"
+                  className="hover:text-orange-400 transition"
                 >
-                  <Facebook />
+                  sindhwai_const@yahoo.in
                 </a>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-gray-300">
+                <Phone size={18} className="text-orange-500" />
                 <a
-                  href="https://twitter.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-orange-500 transition"
+                  href="tel:+919825111774"
+                  className="hover:text-orange-400 transition"
                 >
-                  <Twitter />
-                </a>
-                <a
-                  href="https://instagram.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-orange-500 transition"
-                >
-                  <Instagram />
-                </a>
-                <a
-                  href="https://linkedin.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-orange-500 transition"
-                >
-                  <Linkedin />
+                  +91 98251 11774
                 </a>
               </div>
             </div>
           </div>
 
+          {/* Social Media Links */}
+          <div className="flex flex-col items-center">
+            <h3 className="text-xl font-semibold mb-4 text-white">
+              Connect With Us
+            </h3>
+            <div className="flex space-x-4">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-gray-300 hover:text-orange-500 transition-colors duration-300"
+                >
+                  <Icon size={24} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright and Design Credit */}
+        <div className="text-center text-sm text-gray-400 border-t border-gray-700 pt-6">
+          <p>
+            © {new Date().getFullYear()}{" "}
+            <span className="font-semibold text-white">
+              Shree Sindhwai Constructions
+            </span>
+            . All rights reserved. Designed by{" "}
+            <a
+              href="https://www.techifive.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-400 hover:text-orange-300 transition"
+            >
+              Techifive
+            </a>
+          </p>
         </div>
       </div>
 
-      {/* Bottom line */}
-      <div className="text-center text-sm text-gray-400 border-t border-gray-700 mt-10 pt-4">
-        © {new Date().getFullYear()}{" "}
-        <span className="font-semibold text-white">
-          Shree Sindhwai Construction
-        </span>
-        . All rights reserved. Designed by{" "}
-        <a
-          href="https://www.techifive.com"
-          target="_blank"
-          className="text-blue-400 underline hover:text-blue-300 transition"
-        >
-          Techifive
-        </a>
-      </div>
-
-      {/* Scroll to Top Arrow */}
+      {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className="fixed right-4 bottom-4 bg-orange-500 hover:bg-orange-600 p-2 rounded-full shadow-md transition z-50"
+        className="absolute right-4 bottom-4 bg-orange-500 hover:bg-orange-600 p-3 rounded-full shadow-lg transition-all duration-300 z-50 animate-bounce"
       >
         <ArrowUp size={20} className="text-white" />
       </button>

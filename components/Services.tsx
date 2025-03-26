@@ -78,7 +78,7 @@ const Services: FC = () => {
             </div>
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/70 to-transparent opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white text-center p-8 transition-all duration-500 transform translate-y-10 group-hover:translate-y-0">
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/70 to-transparent opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white text-center p-8 pt-4 transition-all duration-500 transform translate-y-10 group-hover:translate-y-0">
               <motion.div
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
@@ -90,12 +90,9 @@ const Services: FC = () => {
               <h3 className="md:text-3xl text-xl font-bold mb-4">
                 {service.title}
               </h3>
-              <p className="md:text-lg  text-sm leading-relaxed mb-8 max-w-lg">
+              <p className="md:text-lg  text-sm leading-relaxed mb-8 max-w-lg pb-10">
                 {service.description}
               </p>
-              <button className="bg-orange-500 hover:bg-orange-600 px-8 py-3 rounded-lg text-white text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105">
-                Read More
-              </button>
             </div>
 
             {/* Bottom Bar */}
