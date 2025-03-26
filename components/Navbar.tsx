@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X, Building2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,23 +14,26 @@ export default function Navbar() {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 text-xl md:text-3xl font-semibold font-serif text-orange-600 flex flex-row gap-2">
+          <Link
+            href={"/"}
+            className="flex-shrink-0 text-xl md:text-3xl font-semibold font-serif text-orange-600 flex flex-row gap-2"
+          >
             <span className="text-blue-950">
               <Building2 size={28} />
             </span>
             Sindhwai Constructions
-          </div>
+          </Link>
 
           {/* Desktop Nav - Right Aligned */}
           <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
             {[
-              { label: "Home", href: "#hero" },
+              { label: "Home", href: "/" },
               { label: "About", href: "#about" },
               { label: "Services", href: "#services" },
               { label: "Projects", href: "#projects" },
               { label: "Contact", href: "/contact" },
             ].map(({ label, href }) => (
-              <a
+              <Link
                 key={label}
                 href={href}
                 className="relative px-2 py-1 hover:text-orange-600 hover:scale-105 transition-all duration-300 group"
@@ -37,7 +41,7 @@ export default function Navbar() {
                 <span className="relative z-10">{label}</span>
                 <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -54,13 +58,13 @@ export default function Navbar() {
           <div className="md:hidden bg-white shadow-lg px-4 pb-4">
             <nav className="flex flex-col gap-4 text-gray-700 font-medium">
               {[
-                { name: "Home", id: "#hero" },
+                { name: "Home", id: "/" },
                 { name: "About", id: "#about" },
                 { name: "Services", id: "#services" },
                 { name: "Projects", id: "#projects" },
                 { name: "Contact", id: "/contact" },
               ].map(({ name, id }) => (
-                <a
+                <Link
                   key={id}
                   onClick={() => setIsOpen(false)}
                   href={`${id}`}
@@ -69,7 +73,7 @@ export default function Navbar() {
                   <span className="relative z-10">{name}</span>
                   <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                   <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

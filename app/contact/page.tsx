@@ -3,34 +3,40 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+
 import Navbar from "@/components/Navbar";
 
 const Contact: React.FC = () => {
   const [result, setResult] = useState("");
-  const router = useRouter();
 
-  const onSubmit = async (event: any) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Sending...");
 
-    const formData = new FormData(event.target);
+    const form = event.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
 
-    const response = await fetch("https://formcarry.com/s/2gbzqJ9Z8er", {
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    const response = await fetch("/api/sendmail", {
       method: "POST",
-      body: formData,
       headers: {
-        Accept: "application/json",
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify(data),
     });
 
-    const data = await response.json();
+    const resData = await response.json();
 
-    if (data.code === 200) {
+    if (resData.success) {
       setResult("✅ Message sent successfully!");
-      event.target.reset();
+      form.reset();
     } else {
-      console.error("Error", data);
+      console.error("Error:", resData);
       setResult("❌ Something went wrong. Please try again.");
     }
   };
@@ -52,7 +58,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-blue-600 text-lg font-semibold mb-2"
           >
-            Let's Connect
+            {`Let's Connect`}
           </motion.h4>
           <motion.h2
             initial={{ y: -10, opacity: 0 }}
