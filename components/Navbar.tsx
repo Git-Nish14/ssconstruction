@@ -28,9 +28,9 @@ export default function Navbar() {
           <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
             {[
               { label: "Home", href: "/" },
-              { label: "About", href: "#about" },
-              { label: "Services", href: "#services" },
-              { label: "Projects", href: "#projects" },
+              { label: "About", href: "/#about" },
+              { label: "Services", href: "/#services" },
+              { label: "Projects", href: "/#projects" },
               { label: "Contact", href: "/contact" },
             ].map(({ label, href }) => (
               <Link
@@ -59,9 +59,9 @@ export default function Navbar() {
             <nav className="flex flex-col gap-4 text-gray-700 font-medium">
               {[
                 { name: "Home", id: "/" },
-                { name: "About", id: "#about" },
-                { name: "Services", id: "#services" },
-                { name: "Projects", id: "#projects" },
+                { name: "About", id: "/#about" },
+                { name: "Services", id: "/#services" },
+                { name: "Projects", id: "/#projects" },
                 { name: "Contact", id: "/contact" },
               ].map(({ name, id }) => (
                 <Link
