@@ -87,8 +87,10 @@ const Services: FC = () => {
               >
                 {service.icon}
               </motion.div>
-              <h3 className="text-3xl font-bold mb-4">{service.title}</h3>
-              <p className="text-lg leading-relaxed mb-8 max-w-lg">
+              <h3 className="md:text-3xl text-xl font-bold mb-4">
+                {service.title}
+              </h3>
+              <p className="md:text-lg  text-sm leading-relaxed mb-8 max-w-lg">
                 {service.description}
               </p>
               <button className="bg-orange-500 hover:bg-orange-600 px-8 py-3 rounded-lg text-white text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105">

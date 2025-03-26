@@ -53,23 +53,24 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden bg-white shadow-lg px-4 pb-4">
             <nav className="flex flex-col gap-4 text-gray-700 font-medium">
-              {["Home", "About", "Services", "Projects", "Contact"].map(
-                (item) => (
-                  <a
-                    key={item}
-                    onClick={() => setIsOpen(false)}
-                    href="#"
-                    className="relative px-2 py-1 hover:text-orange-600 transition-colors duration-300 group"
-                  >
-                    <span className="relative z-10">{item}</span>
-                    <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                    <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                  </a>
-                )
-              )}
-              <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded w-full text-left">
-                Get a Quote
-              </button>
+              {[
+                { name: "Home", id: "#hero" },
+                { name: "About", id: "#about" },
+                { name: "Services", id: "#services" },
+                { name: "Projects", id: "#projects" },
+                { name: "Contact", id: "/contact" },
+              ].map(({ name, id }) => (
+                <a
+                  key={id}
+                  onClick={() => setIsOpen(false)}
+                  href={`${id}`}
+                  className="relative px-2 py-1 hover:text-orange-600 transition-colors duration-300 group"
+                >
+                  <span className="relative z-10">{name}</span>
+                  <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-orange-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                </a>
+              ))}
             </nav>
           </div>
         )}
