@@ -65,9 +65,7 @@ const About = () => {
           Making Your Vision Come True At The Basics.
         </h1>
         <p className="text-gray-500 mb-6 text-sm sm:text-base">
-          {`Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s`}
+          {`Construction stability is the key`}
         </p>
 
         {/* Team Image and Features */}
