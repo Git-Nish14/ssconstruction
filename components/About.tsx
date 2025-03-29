@@ -64,9 +64,6 @@ const About = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-900 mb-4 leading-tight">
           Making Your Vision Come True At The Basics.
         </h1>
-        <p className="text-gray-500 mb-6 text-sm sm:text-base">
-          {`Construction stability is the key`}
-        </p>
 
         {/* Team Image and Features */}
         <div className="flex flex-col sm:flex-row mb-6 gap-4">
