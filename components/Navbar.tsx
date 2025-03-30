@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Building2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -13,15 +13,19 @@ export default function Navbar() {
     <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50 py-3">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo with text aligned to the extreme left */}
           <Link
             href={"/"}
-            className="flex-shrink-0 text-xl md:text-3xl font-semibold font-serif text-orange-600 flex flex-row gap-2"
+            className="flex-shrink-0 text-xl md:text-3xl font-semibold font-serif text-orange-600 flex items-center gap-2"
           >
-            <span className="text-blue-950">
-              <Building2 size={28} />
+            <img
+              src="/navbarlogo.png"
+              alt="Sindhwai Constructions Logo"
+              className="h-14 sm:h-16 md:h-24" // Adjusted size of the logo for mobile
+            />
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold font-sans">
+              Sindhwai Constructions
             </span>
-            Sindhwai Constructions
           </Link>
 
           {/* Desktop Nav - Right Aligned */}
@@ -56,7 +60,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden bg-white shadow-lg px-4 pb-4">
-            <nav className="flex flex-col gap-4 text-gray-700 font-medium">
+            <nav className="flex flex-col gap-6 text-gray-700 font-medium">
               {[
                 { name: "Home", id: "/" },
                 { name: "About", id: "/#about" },
