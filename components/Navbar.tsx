@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -50,17 +49,35 @@ export default function Navbar() {
           </nav>
 
           {/* Mobile Hamburger */}
-          <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-800">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <div className="md:hidden relative z-20">
+            <button
+              onClick={toggleMenu}
+              className="relative z-20 flex flex-col justify-center items-center w-8 h-8 space-y-1.5 cursor-pointer"
+            >
+              <span
+                className={`w-6 h-0.5 bg-gray-800 transition-all duration-300 transform ${
+                  isOpen ? "rotate-45 translate-y-2.5" : ""
+                }`}
+              ></span>
+              <span
+                className={`w-6 h-0.5 bg-gray-800 transition-all duration-300 ${
+                  isOpen ? "opacity-0" : ""
+                }`}
+              ></span>
+              <span
+                className={`w-6 h-0.5 bg-gray-800 transition-all duration-300 transform ${
+                  isOpen ? "-rotate-45 -translate-y-2.5" : ""
+                }`}
+              ></span>
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu with Sliding Animation */}
         {isOpen && (
-          <div className="md:hidden bg-white shadow-lg px-4 pb-4">
-            <nav className="flex flex-col gap-6 text-gray-700 font-medium">
+          <div className="md:hidden bg-white bg-opacity-95 shadow-xl px-4 pb-4 rounded-lg border border-white border-opacity-30 fixed top-0 right-0 bottom-0 w-2/3 sm:w-1/2 transition-transform transform translate-x-0 ease-in-out duration-300">
+            <div className="flex justify-end pb-4"></div>
+            <nav className="flex flex-col gap-6 text-gray-700 font-medium mt-4">
               {[
                 { name: "Home", id: "/" },
                 { name: "About", id: "/#about" },
@@ -71,7 +88,7 @@ export default function Navbar() {
                 <Link
                   key={id}
                   onClick={() => setIsOpen(false)}
-                  href={`${id}`}
+                  href={id}
                   className="relative px-2 py-1 hover:text-orange-600 transition-colors duration-300 group"
                 >
                   <span className="relative z-10">{name}</span>

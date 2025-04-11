@@ -58,7 +58,7 @@ function Hero() {
         </motion.p>
 
         <Link
-          href="https://www.google.com/maps/place/Sindhwai+Constructions"
+          href="https://www.google.pl/maps/place/Royal+Square/@23.0748711,72.507402,17z/data=!3m1!4b1!4m6!3m5!1s0x395e9cb76d762ed3:0xfc5c907a0a855a6e!8m2!3d23.0748711!4d72.5099769!16s%2Fg%2F11b76bmr3x?entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           rel="noopener noreferrer"
         >
