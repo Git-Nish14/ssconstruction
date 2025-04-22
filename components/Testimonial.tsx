@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Testimonial {
   id: number;
@@ -60,49 +60,78 @@ const TestimonialsSection = () => {
   );
   const [windowWidth, setWindowWidth] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const slideIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const slideContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Handle window resize for responsive behavior
+  // Determine number of testimonials to show
+  const testimonialsToShow = windowWidth >= 768 ? 2 : 1;
+
+  // Debounced resize handler
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
 
+    // Debounce function
+    let timeoutId: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleResize, 200);
+    };
+
     // Set initial width
     if (typeof window !== "undefined") {
       setWindowWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
+      window.addEventListener("resize", debouncedResize);
     }
 
     return () => {
+      clearTimeout(timeoutId);
       if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("resize", debouncedResize);
       }
     };
   }, []);
 
-  // Determine how many testimonials to show based on screen size
+  // Check if section is visible
   useEffect(() => {
-    const testimonialsToShow = windowWidth >= 768 ? 2 : 1;
-    const endIndex = (currentIndex + testimonialsToShow) % testimonials.length;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.2 }
+    );
 
-    if (endIndex < currentIndex) {
-      // Wrap around case
-      setVisibleTestimonials(
-        [
-          ...testimonials.slice(currentIndex),
-          ...testimonials.slice(0, endIndex),
-        ].slice(0, testimonialsToShow)
-      );
-    } else {
-      setVisibleTestimonials(
-        testimonials.slice(currentIndex, currentIndex + testimonialsToShow)
-      );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  }, [currentIndex, windowWidth]);
 
-  // Auto-scroll functionality
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Update visible testimonials when index changes
+  useEffect(() => {
+    const computeVisibleTestimonials = () => {
+      const results: Testimonial[] = [];
+
+      for (let i = 0; i < testimonialsToShow; i++) {
+        const index = (currentIndex + i) % testimonials.length;
+        results.push(testimonials[index]);
+      }
+
+      return results;
+    };
+
+    setVisibleTestimonials(computeVisibleTestimonials());
+  }, [currentIndex, testimonialsToShow]);
+
+  // Auto-scroll functionality with pause when section not visible
   useEffect(() => {
     const startAutoScroll = () => {
       if (slideIntervalRef.current) {
@@ -110,10 +139,10 @@ const TestimonialsSection = () => {
       }
 
       slideIntervalRef.current = setInterval(() => {
-        if (!isPaused) {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+        if (!isPaused && isVisible) {
+          goToNextSlide();
         }
-      }, 4000); // Change slide every 5 seconds
+      }, 4000); // Change slide every 4 seconds
     };
 
     startAutoScroll();
@@ -123,60 +152,97 @@ const TestimonialsSection = () => {
         clearInterval(slideIntervalRef.current);
       }
     };
-  }, [isPaused, testimonials.length]);
+  }, [isPaused, isVisible]);
 
-  // Generate star rating
-  const renderStarRating = (rating: number) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
+  // Optimized slide navigation functions
+  const goToNextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  }, []);
 
-    // Full stars
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <svg
-          key={`star-${i}`}
-          className="w-5 h-5 text-orange-500 fill-current"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      );
-    }
+  const goToPrevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  }, []);
 
-    // Half star
-    if (hasHalfStar) {
-      stars.push(
-        <svg
-          key="half-star"
-          className="w-5 h-5 text-orange-500 fill-current"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-          <path d="M12 17.27V2" style={{ clipPath: "inset(0 50% 0 0)" }} />
-        </svg>
-      );
-    }
+  const goToSlide = useCallback((index: number) => {
+    setCurrentIndex(index);
+  }, []);
 
-    // Empty stars
-    const emptyStars = 5 - Math.ceil(rating);
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(
-        <svg
-          key={`empty-star-${i}`}
-          className="w-5 h-5 text-gray-300 fill-current"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      );
-    }
-
-    return stars;
-  };
+  // Optimized star rating renderer with memoization
+  const renderStarRating = useCallback((rating: number) => {
+    return (
+      <div
+        className="flex"
+        role="img"
+        aria-label={`Rating: ${rating} out of 5 stars`}
+      >
+        {[...Array(5)].map((_, i) => {
+          // Full star
+          if (i < Math.floor(rating)) {
+            return (
+              <svg
+                key={`star-${i}`}
+                className="w-5 h-5 text-orange-500 fill-current"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            );
+          }
+          // Half star
+          else if (i === Math.floor(rating) && rating % 1 !== 0) {
+            return (
+              <div key={`half-star-${i}`} className="relative w-5 h-5">
+                {/* Gray background */}
+                <svg
+                  className="w-5 h-5 text-gray-300 fill-current absolute"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                {/* Orange foreground (half) */}
+                <div
+                  className="absolute overflow-hidden"
+                  style={{ width: "50%" }}
+                >
+                  <svg
+                    className="w-5 h-5 text-orange-500 fill-current"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </div>
+              </div>
+            );
+          }
+          // Empty star
+          else {
+            return (
+              <svg
+                key={`empty-star-${i}`}
+                className="w-5 h-5 text-gray-300 fill-current"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            );
+          }
+        })}
+      </div>
+    );
+  }, []);
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section
+      ref={sectionRef}
+      className="py-16 bg-gray-100"
+      aria-label="Client Testimonials"
+    >
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -190,8 +256,12 @@ const TestimonialsSection = () => {
             TESTIMONIALS
           </h3>
           <h2 className="text-4xl md:text-5xl text-blue-950 font-bold mt-2 flex items-center justify-center gap-2">
-            Our Clients Reviews.
+            Our Clients Reviews
           </h2>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            See what our clients are saying about our services and commitment to
+            excellence.
+          </p>
         </motion.div>
 
         {/* Testimonials Slider */}
@@ -200,41 +270,76 @@ const TestimonialsSection = () => {
           ref={slideContainerRef}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          aria-roledescription="carousel"
+          aria-label="Testimonials carousel"
         >
-          <div className="overflow-hidden">
-            <AnimatePresence initial={false} mode="popLayout">
+          {/* Navigation Buttons */}
+          <button
+            onClick={goToPrevSlide}
+            className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 z-10 bg-white p-2 rounded-full shadow-md text-blue-950 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <button
+            onClick={goToNextSlide}
+            className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 z-10 bg-white p-2 rounded-full shadow-md text-blue-950 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Testimonials */}
+          <div className="overflow-hidden" aria-live="polite">
+            <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
                 className="flex flex-wrap"
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{
-                  type: "tween",
-                  ease: "easeInOut",
-                  duration: 0.8,
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                {visibleTestimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full md:w-1/2 p-4">
-                    <div className="bg-white p-6 rounded shadow-md relative h-full">
-                      <div className="mb-6">
-                        <p className="text-gray-600 italic">
+                {visibleTestimonials.map((testimonial, idx) => (
+                  <div
+                    key={testimonial.id}
+                    className="w-full md:w-1/2 p-4"
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`Testimonial ${idx + 1} of ${
+                      testimonials.length
+                    }`}
+                  >
+                    <motion.div
+                      className="bg-white p-6 rounded shadow-md relative h-full transition-all duration-300 hover:shadow-lg"
+                      whileHover={{ y: -5 }}
+                    >
+                      {/* Background Quote Icon */}
+                      <div className="absolute top-6 right-6 text-blue-950 opacity-20">
+                        <Quote size={48} />
+                      </div>
+
+                      {/* Quote */}
+                      <div className="mb-6 relative z-10">
+                        <p className="text-gray-600 italic relative">
                           {testimonial.quote}
                         </p>
-                        <div className="absolute top-6 right-6 text-blue-950 opacity-30">
-                          <Quote size={32} />
-                        </div>
                       </div>
+
+                      {/* Author Info */}
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                         <div className="flex items-center">
-                          <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
+                          <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-orange-500">
                             <Image
                               src={testimonial.image}
-                              alt={testimonial.name}
+                              alt={`Portrait of ${testimonial.name}`}
                               fill
                               className="object-cover"
                               sizes="(max-width: 768px) 30vw, 20vw"
+                              loading="eager"
+                              placeholder="blur"
+                              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88Pz/fwAJDQNGWGyn3QAAAABJRU5ErkJggg=="
                             />
                           </div>
                           <div>
@@ -249,11 +354,8 @@ const TestimonialsSection = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="text-blue-950 text-4xl">
-                          <Quote size={36} />
-                        </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 ))}
               </motion.div>
@@ -262,15 +364,23 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Pagination Indicators */}
-        <div className="flex justify-center space-x-2">
+        <div
+          className="flex justify-center space-x-3"
+          role="tablist"
+          aria-label="Select a testimonial"
+        >
           {testimonials.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-sm transition-colors duration-300 ${
-                index === currentIndex ? "bg-orange-500" : "bg-blue-950"
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                index === currentIndex
+                  ? "bg-orange-500 w-8"
+                  : "bg-blue-950 hover:bg-blue-800"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
+              aria-selected={index === currentIndex}
+              role="tab"
             />
           ))}
         </div>
