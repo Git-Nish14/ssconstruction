@@ -103,9 +103,9 @@ const WhyChooseUs = () => {
             </h2>
 
             <p className="text-gray-600 max-w-2xl mx-auto">
-              With over 15 years of experience in the construction industry,
+              {` With over 15 years of experience in the construction industry,
               we've built our reputation on quality, reliability, and
-              exceptional customer service.
+              exceptional customer service.`}
             </p>
           </motion.div>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { Send, Sparkles, MessageCircle, X } from "lucide-react";
+import { Send, Sparkles, MessageCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const Contact: React.FC = () => {
@@ -110,10 +110,10 @@ const Contact: React.FC = () => {
           className="text-center mb-10"
         >
           <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-            Let's Create Something Amazing
+            {`Let's Create Something Amazing`}
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto md:text-lg">
-            Reach out and let's discuss your vision. We're ready to collaborate.
+            {`Reach out and let's discuss your vision. We're ready to collaborate.`}
           </p>
         </motion.div>
 

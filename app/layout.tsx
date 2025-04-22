@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,7 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shree Sindhwai Constructions | Premium Civil & Infrastructure Projects in India",
+  title:
+    "Shree Sindhwai Constructions | Premium Civil & Infrastructure Projects in India",
   description:
     "Shree Sindhwai Constructions is a trusted name in delivering top-tier civil engineering and infrastructure projects across India. With 20+ years of experience, we focus on safety, innovation, and quality in residential, commercial, and industrial construction.",
   keywords: [
@@ -59,7 +61,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -74,6 +75,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );

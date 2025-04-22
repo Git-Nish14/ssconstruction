@@ -172,9 +172,9 @@ export default function AboutUs() {
 
                 <div className="relative my-6 pl-4 border-l-4 border-orange-500 italic bg-orange-50 p-4 rounded-r-lg">
                   <p className="text-gray-700">
-                    "We are committed to excellence, transparency, and timely
+                    {`"We are committed to excellence, transparency, and timely
                     execution of projects — values that form the backbone of our
-                    operations and client relationships."
+                    operations and client relationships."`}
                   </p>
                 </div>
 
@@ -220,11 +220,11 @@ export default function AboutUs() {
                       Founder & Managing Director
                     </p>
                     <p className="text-gray-700 text-sm">
-                      A seasoned Civil Engineer with unmatched industry
+                      {`A seasoned Civil Engineer with unmatched industry
                       expertise and a passion for structural excellence. Mr.
                       Patel's vision has been the guiding light for the
                       company's steady growth and reputation for integrity and
-                      reliability.
+                      reliability.`}
                     </p>
                   </div>
                 </div>
@@ -375,8 +375,8 @@ export default function AboutUs() {
             <span className="text-orange-500">Construction Journey</span>?
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Let's discuss how Sindhwai Constructions can bring your vision to
-            life with our expertise, dedication, and commitment to excellence.
+            {` Let's discuss how Sindhwai Constructions can bring your vision to
+            life with our expertise, dedication, and commitment to excellence.`}
           </p>
           <Link
             href="/contact"

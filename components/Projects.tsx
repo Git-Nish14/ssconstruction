@@ -170,7 +170,7 @@ const ProjectsSection = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        {filteredProjects.map((project, index) => (
+        {filteredProjects.map((project) => (
           <motion.div
             key={project.id}
             variants={itemVariants}

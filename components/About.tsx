@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import {
-  HardHat,
-  Users,
-  CheckCircle,
-  Building,
-  Award,
-  Clock,
-} from "lucide-react";
+import { HardHat, Users, CheckCircle, Building } from "lucide-react";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
