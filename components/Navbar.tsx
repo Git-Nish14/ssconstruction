@@ -22,9 +22,14 @@ export default function Navbar() {
               alt="Sindhwai Constructions Logo"
               className="h-14 sm:h-16 md:h-24" // Adjusted size of the logo for mobile
             />
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold font-sans">
-              Sindhwai Constructions
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-2xl text-gray-800 tracking-tight">
+                Sindhwai
+              </span>
+              <span className="text-2xl font-medium text-orange-600 -mt-1">
+                Constructions
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav - Right Aligned */}
